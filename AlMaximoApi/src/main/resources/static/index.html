@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="picture/logo.png" type="image/png">
+    <title>Gestión de Productos - AlMaximo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="AlMaximo">
+        </div>
+        <h1>Gestión de Productos</h1>
+    </header>
+
+    <main style="padding: 20px;">
+        <div id="modo-listado" class="Contenedor">
+            <div class="Contenedor-filtro">
+                <div class="search-group">
+                    <input type="text" id="filtro-clave" placeholder="Buscar por Clave...">
+                    <select id="filtro-tipo">
+                        <option value="">Todos los Tipos</option>
+                    </select>
+                    <button class="btn btn-primary" id="btnBuscar" onclick="buscarProductos()">Buscar</button>
+                </div>
+                <div class="Contenedor-button">
+                    <button class="btn btn-success" onclick="nuevoProducto()">Nuevo Producto</button>
+                </div>
+            </div>
+            <div class="scroll-box">
+                <table id="tabla-productos" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Clave</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="modo-edicion" class="hidden Contenedor">
+            <h2 id="titulo-edicion">Editar Producto</h2>
+            <form id="form-producto">
+                <div class="form-group">
+                    <label>Clave (Interna)</label>
+                    <input type="text" id="prod-clave" required>
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="prod-nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input type="number" step="0.01" id="prod-precio" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Producto</label>
+                    <select id="prod-tipo" required></select>
+                </div>
+
+                <h3>Proveedores Asignados</h3>
+                <button type="button" class="btn btn-secondary" onclick="abrirModalProveedor()">Agregar Proveedor</button>
+                <div class="scroll-box">
+                    <table id="tabla-prod-proveedores" class="table">
+                        <thead>
+                            <tr>
+                                <th>Proveedor</th>
+                                <th>Clave Prov.</th>
+                                <th>Costo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                    <button type="button" class="btn btn-secondary" onclick="cancelarEdicion()">&#8592; Volver al Listado</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarProducto()">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <div id="modal-proveedor" class="hidden modal">
+        <div class="modal-content">
+            <div id="modo-listado" class="Contenedor">
+                <h3>Agregar Proveedor</h3>               
+                <label>Proveedor</label>
+                <select id="modal-prov-select"></select>
+                <label>Clave del Proveedor</label>
+                <input type="text" id="modal-prov-clave">
+                <label>Costo</label>
+                <input type="number" step="0.01" id="modal-prov-costo">
+                <div class="Contenedor-button">
+                    <button type="button" class="btn btn-primary" onclick="agregarProveedorLista()">Guardar</button>
+                    <button type="button" class="btn btn-danger" onclick="cerrarModalProveedor()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alertaMensaje"></div>
+    <script src="js/main.js"></script>
+</body>
+</html>
