@@ -73,7 +73,6 @@ function renderTablaProductos(productos) {
 }
 
 function nuevoProducto() {
-    mensajeAlerta('success', 'Hola');
     isEditing = false;
     document.getElementById('titulo-edicion').innerText = 'Nuevo Producto';
     document.getElementById('form-producto').reset();
@@ -115,7 +114,6 @@ async function eliminarProducto(clave) {
         if(res.ok) {
             buscarProductos();
         } else {
-            //mensajeAlerta('success', 'Error al eliminar');
             alert('Error al eliminar');
         }
     } catch (error) {
@@ -155,10 +153,7 @@ function agregarProveedorLista() {
     const claveProv = document.getElementById('modal-prov-clave').value;
     const costo = parseFloat(document.getElementById('modal-prov-costo').value);
 
-    //mensajeAlerta('success', 'Completa los campos');
-
     if(!claveProv || !costo) {
-        //mensajeAlerta('success', 'Completa los campos');
         alert('Completa los campos');
         return;
     }
@@ -219,37 +214,14 @@ async function guardarProducto() {
         });
 
         if(res.ok) {
-            //mensajeAlerta('success', 'Guardado correctamente');
             alert('Guardado correctamente');
             cancelarEdicion();
             buscarProductos();
         } else {
-            //mensajeAlerta('success', 'Error al guardar');
             alert('Error al guardar');
         }
     } catch (error) {
         console.error(error);
-        //mensajeAlerta('success', 'Error de conexión');
         alert('Error de conexión');
     }
-}
-
-function mensajeAlerta(tipo, mensaje) {
-    const alerta = document.createElement("div");
-
-    const tipoBootstrap = tipo === 'success' ? 'success' : 'danger';
-    const titulo = tipo === 'success' ? 'Éxito' : 'Error';
-
-    alerta.className = `alert alert-${tipoBootstrap}`;
-    alerta.innerHTML = `
-        <span class="close-btn">&times;</span>
-        <strong>${titulo}:</strong> ${mensaje}.
-    `;
-
-    document.getElementById("alertaMensaje").appendChild(alerta);
-
-    alerta.querySelector(".close-btn")
-        .addEventListener("click", () => alerta.remove());
-
-    setTimeout(() => alerta.remove(), 4000);
 }
